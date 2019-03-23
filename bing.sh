@@ -6,7 +6,7 @@
 # The XML and RSS responses provide links to 1366x768 images.
 # The JSON response provides links to 1920x1080 images.
 #
-# Copyright 2017 Thomas M. Parks <tmparks@yahoo.com>
+# Copyright 2017-2019 Thomas M. Parks <tmparks@yahoo.com>
 
 BASE_URL='https://www.bing.com'
 JSON_FILE=$(mktemp)
@@ -16,15 +16,18 @@ for QUERY_URL in \
 	'/HPImageArchive.aspx?format=js&idx=7&n=8&mkt=en-US'
 do
 	# Get JSON file with URLs for recent images.
-	curl --silent "$BASE_URL$QUERY_URL" > $JSON_FILE
+	curl --silent "$BASE_URL$QUERY_URL" > "$JSON_FILE"
 
 	# Extract list of URLs from JSON file and get images.
 	for IMAGE_URL in $( \
 		egrep --only-matching --regexp='"url":"[^"]*"' "$JSON_FILE" | \
-		egrep --only-matching --regexp='[-_/A-Za-z0-9]*.jpg' )
+		egrep --only-matching --regexp='/[^"]*' )
 	do
-		echo $IMAGE_URL
-		curl --silent --remote-name "$BASE_URL$IMAGE_URL"
+		IMAGE_FILE=$(echo $IMAGE_URL | \
+			egrep --only-matching --regexp='id=[^&]*' | \
+			egrep --only-matching --regexp='[-_/.A-Za-z0-9]*.jpg' )
+		echo $IMAGE_FILE
+		curl --silent "$BASE_URL$IMAGE_URL" > "$IMAGE_FILE"
 	done
 done
 
