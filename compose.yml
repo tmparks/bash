@@ -1,0 +1,12 @@
+# Copyright 2024 Thomas M. Parks <tmparks@yahoo.com>
+
+version: "2"
+services:
+  develop:
+    build: .
+    volumes:
+      - .:${PWD}
+    working_dir: ${PWD}
+    user: 1000:cdrom
+    devices:
+      - /dev/cdrom

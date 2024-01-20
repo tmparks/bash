@@ -2,6 +2,7 @@
 FROM ubuntu
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --yes \
+        gddrescue \
         git \
         imagemagick \
     && rm --recursive --force /var/lib/apt/lists/*
