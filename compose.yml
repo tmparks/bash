@@ -1,12 +1,12 @@
 # Copyright 2024 Thomas M. Parks <tmparks@yahoo.com>
 
-version: "2"
 services:
   develop:
     build: .
     volumes:
-      - .:${PWD}
+      - .:/${COMPOSE_PROJECT_NAME} # directory where this file resides
+      - ${PWD}:${PWD}              # directory from which docker compose is run
     working_dir: ${PWD}
-    user: 1000:cdrom
+    user: nobody:cdrom
     devices:
       - /dev/cdrom

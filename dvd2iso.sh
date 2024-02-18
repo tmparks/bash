@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# Create an ISO image from an optical disc (CD or DVD)
+# Create an ISO image from an optical disc (CD-ROM or DVD)
 #
 # Copyright 2023-2024 Thomas M. Parks <tmparks@yahoo.com>
 
@@ -15,4 +15,4 @@ fi
 
 IFS=":,$IFS" read IGNORE1 IGNORE2 COUNT IGNORE3 IGNORE4 SIZE IGNORE5 < <(isosize --sector $INPUT)
 echo COUNT=$COUNT SIZE=$SIZE
-ddrescue --verbose --sector-size=$SIZE --cluster-size=512 --idirect $INPUT $OUTPUT $MAPFILE
+ddrescue --verbose --sector-size=$SIZE --idirect $INPUT $OUTPUT $MAPFILE
