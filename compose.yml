@@ -1,12 +1,14 @@
-# Copyright 2024 Thomas M. Parks <tmparks@yahoo.com>
+# export UID; docker compose run --rm develop [command]
+#
+# Copyright 2024-2025 Thomas M. Parks <tmparks@yahoo.com>
 
 services:
   develop:
     build: .
     volumes:
-      - .:/${COMPOSE_PROJECT_NAME} # directory where this file resides
+      - .:/${COMPOSE_PROJECT_NAME} # directory where this compose file resides
       - ${PWD}:${PWD}              # directory from which docker compose is run
     working_dir: ${PWD}
-    user: nobody:cdrom
+    user: ${UID:-ubuntu}:cdrom     # unprivileged user
     devices:
       - /dev/cdrom

@@ -1,4 +1,4 @@
-# Copyright 2022-2024 Thomas M. Parks <tmparks@yahoo.com>
+# Copyright 2022-2025 Thomas M. Parks <tmparks@yahoo.com>
 FROM ubuntu
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --yes \
@@ -7,3 +7,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --yes \
         icedax \
         imagemagick \
     && rm --recursive --force /var/lib/apt/lists/*
+
+USER ubuntu
+WORKDIR /home/ubuntu
