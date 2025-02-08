@@ -1,7 +1,8 @@
+# Stand-alone development container
 # export UID; docker compose run --rm develop [command]
 #
 # Copyright 2024-2025 Thomas M. Parks <tmparks@yahoo.com>
-
+---
 services:
   develop:
     build: .
@@ -12,3 +13,4 @@ services:
     user: ${UID:-ubuntu}:cdrom     # unprivileged user
     devices:
       - /dev/cdrom
+...
